@@ -1,6 +1,7 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useEffect, useMemo, useState } from "react";
 import { SheetContext } from "../context/SheetContext";
 import { Row } from "./Row";
+import { alphabetArr } from "./utils";
 
 type SheetProps = {
     columns: number;
@@ -13,6 +14,8 @@ const Sheet: FC<SheetProps> = ({ columns, rows }) => {
             ...Array(columns).fill("test"),
         ]);
     };
+
+    const alphabet = useMemo(() => alphabetArr(), []);
 
     useEffect(() => {
         /* const coisto = matrixCreator();
@@ -29,17 +32,23 @@ const Sheet: FC<SheetProps> = ({ columns, rows }) => {
                 {/* Header */}
                 <thead>
                     <tr>
-                        {[...Array(columns).keys()].map((columnNumber) => (
+                        <th></th>
+                        {alphabet.slice(0, columns - 1).map((columnNumber) => (
                             <th key={columnNumber}>{columnNumber}</th>
                         ))}
                     </tr>
                 </thead>
                 <tbody>
-                    {[...Array(rows).keys()].map((rowNumber) => (
-                        <React.Fragment key={rowNumber}>
-                            <Row columns={columns} rowIdentifier={rowNumber} />
-                        </React.Fragment>
-                    ))}
+                    {[...Array(rows).keys()].map((rowNumber) => {
+                        return (
+                            <React.Fragment key={rowNumber}>
+                                <Row
+                                    columns={columns}
+                                    rowIdentifier={rowNumber}
+                                />
+                            </React.Fragment>
+                        );
+                    })}
                 </tbody>
             </SheetContext.Provider>
         </>

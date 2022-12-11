@@ -5,8 +5,6 @@ import Sheet from "./components/Sheet";
 import { SheetContext } from "./context/SheetContext";
 
 function App() {
-    const [count, setCount] = useState(0);
-
     return (
         <div>
             <table>
