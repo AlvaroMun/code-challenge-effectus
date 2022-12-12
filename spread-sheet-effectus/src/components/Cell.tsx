@@ -20,18 +20,12 @@ type CellProps = {
  * sheetMatrix state in the SheetContext
  * @param {number} columnIdentifier - The column identifier of the cell.
  * @param {number} rowIdentifier - The row number of the cell.
- * @returns A function that returns a function that returns a function that returns a function that
- * returns a function that returns a function that returns a function that returns a function that
- * returns a function that returns a function that returns a function that returns a function that
- * returns a function that returns a function that returns a function that returns a function that
- * returns a function that returns a function that returns a function that returns a function that
- * returns
+ * @returns Cell component
  */
 export const Cell: FC<CellProps> = ({ rowIdentifier, columnIdentifier }) => {
     const { sheetMatrix, setSheetMatrix } = useContext(SheetContext);
 
-    //TODO: improve funct
-    const inputOnchange = (val: string) => {
+    const setInputValue = (val: string) => {
         setSheetMatrix((prevState: string[][]) => {
             const newState = [...prevState];
             newState[rowIdentifier][columnIdentifier] = val;
@@ -40,7 +34,6 @@ export const Cell: FC<CellProps> = ({ rowIdentifier, columnIdentifier }) => {
     };
 
     const onKeyDownAction = (event: React.KeyboardEvent<HTMLInputElement>) => {
-        console.log("keydown");
         let currentCellVal = sheetMatrix[rowIdentifier][columnIdentifier];
         if (event.key === "Enter" && currentCellVal.startsWith("=")) {
             try {
@@ -48,9 +41,9 @@ export const Cell: FC<CellProps> = ({ rowIdentifier, columnIdentifier }) => {
                 const cellValues = getCellValues(formula, sheetMatrix);
                 const oprationResult = eval(cellValues);
 
-                inputOnchange(oprationResult);
+                setInputValue(oprationResult);
             } catch (error) {
-                inputOnchange("Error: Syntax error or invalid value");
+                setInputValue("Error: Syntax error or invalid value");
                 console.log("error");
             }
         }
@@ -62,7 +55,7 @@ export const Cell: FC<CellProps> = ({ rowIdentifier, columnIdentifier }) => {
                 type={"text"}
                 value={sheetMatrix[rowIdentifier][columnIdentifier]}
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                    inputOnchange(event.target.value);
+                    setInputValue(event.target.value);
                 }}
                 onKeyDown={onKeyDownAction}
                 onSelect={() =>
