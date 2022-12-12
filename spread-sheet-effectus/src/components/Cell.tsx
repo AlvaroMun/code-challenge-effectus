@@ -38,10 +38,11 @@ export const Cell: FC<CellProps> = ({ rowIdentifier, columnIdentifier }) => {
         if (event.key === "Enter" && currentCellVal.startsWith("=")) {
             try {
                 const formula = currentCellVal.slice(1);
+
                 const cellValues = getCellValues(formula, sheetMatrix);
                 const oprationResult = eval(cellValues);
 
-                setInputValue(oprationResult);
+                setInputValue(String(oprationResult));
             } catch (error) {
                 setInputValue("Error: Syntax error or invalid value");
                 console.log("error");

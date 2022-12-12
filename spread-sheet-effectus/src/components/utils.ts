@@ -51,6 +51,10 @@ export const getCellValFromCoor = (coord: string, matriz: string[][]) => {
     return matriz[rowCoord][columnCoord] || "0";
 };
 
+export const hasCellCoordFormat = (str: string) => {
+    return /^[A-Za-z]+.*[0-9]+$/.test(str);
+};
+
 /**
  * It takes a string expression and a matrix and returns a string expression with the cell values
  * instead of the cell coordinates
@@ -66,10 +70,15 @@ export const getCellValues = (expression: string, matriz: string[][]) => {
     const operators = expression
         .split("")
         .filter((val) => operandChar.includes(val));
+
     console.log({ cellCoordinates, operators });
-    const cellValues = cellCoordinates.map((cellCoord) =>
-        getCellValFromCoor(cellCoord, matriz)
-    );
+
+    const cellValues = cellCoordinates.map((cellCoord) => {
+        if (hasCellCoordFormat(cellCoord)) {
+            return getCellValFromCoor(cellCoord, matriz);
+        }
+        return cellCoord;
+    });
 
     let result = [];
 
