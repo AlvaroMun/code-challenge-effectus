@@ -45,7 +45,7 @@ export const Cell: FC<CellProps> = ({ rowIdentifier, columnIdentifier }) => {
                 setInputValue(String(oprationResult));
             } catch (error) {
                 setInputValue("Error: Syntax error or invalid value");
-                console.log("error");
+                console.log("error", error);
             }
         }
     };
@@ -59,9 +59,6 @@ export const Cell: FC<CellProps> = ({ rowIdentifier, columnIdentifier }) => {
                     setInputValue(event.target.value);
                 }}
                 onKeyDown={onKeyDownAction}
-                onSelect={() =>
-                    console.log({ columnIdentifier, rowIdentifier })
-                }
             ></input>
         </td>
     );
