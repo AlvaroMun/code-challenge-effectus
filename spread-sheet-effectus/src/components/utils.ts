@@ -56,13 +56,13 @@ export const hasCellCoordFormat = (str: string) => {
 };
 
 /**
- * It takes a string expression and a matriz and returns a string expression with the cell values
+ * It takes a string expression and a matriz and returns a string expression with the processed values
  * instead of the cell coordinates
  * @param {string} expression - "A1+B1"
  * @param {string[][]} matriz - a 2D array of strings
  * @returns the result of the expression.
  */
-export const getCellValues = (expression: string, matriz: string[][]) => {
+export const getProcessedValues = (expression: string, matriz: string[][]) => {
     const operandChar = ["+", "-", "/", "*"];
     const copy = expression;
 
@@ -71,11 +71,11 @@ export const getCellValues = (expression: string, matriz: string[][]) => {
         .split("")
         .filter((val) => operandChar.includes(val));
 
-    const cellValues = cellCoordinates.map((cellCoord) => {
-        if (hasCellCoordFormat(cellCoord)) {
-            return getCellValFromCoor(cellCoord, matriz);
+    const cellValues = cellCoordinates.map((value) => {
+        if (hasCellCoordFormat(value)) {
+            return getCellValFromCoor(value, matriz);
         }
-        return cellCoord;
+        return value;
     });
 
     let result = [];

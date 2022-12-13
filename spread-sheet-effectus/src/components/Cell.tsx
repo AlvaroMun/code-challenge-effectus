@@ -1,6 +1,6 @@
 import React, { FC, SyntheticEvent, useContext } from "react";
 import { SheetContext } from "../context/SheetContext";
-import { getCellValFromCoor, getCellValue, getCellValues } from "./utils";
+import { getCellValFromCoor, getCellValue, getProcessedValues } from "./utils";
 //@ts-ignore
 import { Parser as FormulaParser } from "hot-formula-parser";
 
@@ -39,7 +39,7 @@ export const Cell: FC<CellProps> = ({ rowIdentifier, columnIdentifier }) => {
             try {
                 const formula = currentCellVal.slice(1);
 
-                const cellValues = getCellValues(formula, sheetMatriz);
+                const cellValues = getProcessedValues(formula, sheetMatriz);
                 /* const oprationResult = eval(cellValues); */
                 const oprationResult = Function("return " + cellValues)();
 
