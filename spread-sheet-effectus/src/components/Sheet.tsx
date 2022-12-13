@@ -22,19 +22,19 @@ type SheetProps = {
  * @returns A table with a header and a body.
  */
 const Sheet: FC<SheetProps> = ({ columns, rows }) => {
-    const matrixCreator = () => {
+    const matrizCreator = () => {
         return [...Array(rows).keys()].map(() => [...Array(columns).fill("")]);
     };
 
     const alphabet = useMemo(() => alphabetArr(), []);
 
-    const [sheetMatrix, setSheetMatrix] = useState<string[][]>(() =>
-        matrixCreator()
+    const [sheetMatriz, setSheetMatriz] = useState<string[][]>(() =>
+        matrizCreator()
     );
 
     return (
         <>
-            <SheetContext.Provider value={{ sheetMatrix, setSheetMatrix }}>
+            <SheetContext.Provider value={{ sheetMatriz, setSheetMatriz }}>
                 <TableHeader headerList={alphabet.slice(0, columns)} />
                 <TableBody rows={rows} columns={columns} />
             </SheetContext.Provider>

@@ -17,16 +17,16 @@ type CellProps = {
 
 /**
  * It renders a table cell with an input element that has an onChange handler that updates the
- * sheetMatrix state in the SheetContext
+ * sheetMatriz state in the SheetContext
  * @param {number} columnIdentifier - The column identifier of the cell.
  * @param {number} rowIdentifier - The row number of the cell.
  * @returns Cell component
  */
 export const Cell: FC<CellProps> = ({ rowIdentifier, columnIdentifier }) => {
-    const { sheetMatrix, setSheetMatrix } = useContext(SheetContext);
+    const { sheetMatriz, setSheetMatriz } = useContext(SheetContext);
 
     const setInputValue = (val: string) => {
-        setSheetMatrix((prevState: string[][]) => {
+        setSheetMatriz((prevState: string[][]) => {
             const newState = [...prevState];
             newState[rowIdentifier][columnIdentifier] = val;
             return newState;
@@ -34,13 +34,14 @@ export const Cell: FC<CellProps> = ({ rowIdentifier, columnIdentifier }) => {
     };
 
     const onKeyDownAction = (event: React.KeyboardEvent<HTMLInputElement>) => {
-        let currentCellVal = sheetMatrix[rowIdentifier][columnIdentifier];
+        let currentCellVal = sheetMatriz[rowIdentifier][columnIdentifier];
         if (event.key === "Enter" && currentCellVal.startsWith("=")) {
             try {
                 const formula = currentCellVal.slice(1);
 
-                const cellValues = getCellValues(formula, sheetMatrix);
-                const oprationResult = eval(cellValues);
+                const cellValues = getCellValues(formula, sheetMatriz);
+                /* const oprationResult = eval(cellValues); */
+                const oprationResult = Function("return " + cellValues)();
 
                 setInputValue(String(oprationResult));
             } catch (error) {
@@ -54,7 +55,7 @@ export const Cell: FC<CellProps> = ({ rowIdentifier, columnIdentifier }) => {
         <td>
             <input
                 type={"text"}
-                value={sheetMatrix[rowIdentifier][columnIdentifier]}
+                value={sheetMatriz[rowIdentifier][columnIdentifier]}
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                     setInputValue(event.target.value);
                 }}

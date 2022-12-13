@@ -1,12 +1,12 @@
 /**
  * "Given a column and row coordinate, return the value of the cell at that coordinate in the given
- * matrix."
+ * matriz."
  *
- * The function is generic, meaning it can work with any type of matrix
+ * The function is generic, meaning it can work with any type of matriz
  * @param {number} columnCoord - The column coordinate of the cell you want to get the value from.
  * @param {number} rowCoord - The row coordinate of the cell you want to get the value from.
- * @param {string[][] | number[][]} matriz - the matrix you want to get the value from
- * @returns The value of the cell in the matrix.
+ * @param {string[][] | number[][]} matriz - the matriz you want to get the value from
+ * @returns The value of the cell in the matriz.
  */
 export const getCellValue = (
     columnCoord: number,
@@ -38,10 +38,10 @@ const getAlphabetIndex = (alphabetLetter: string) => {
 };
 
 /**
- * It takes a coordinate (e.g. A2) and a matrix and returns the value of the cell in the matrix that
+ * It takes a coordinate (e.g. A2) and a matriz and returns the value of the cell in the matriz that
  * corresponds to the coordinate
  * @param {string} coord - the coordinate of the cell you want to get the value from.
- * @param {string[][]} matriz - the matrix that contains the values
+ * @param {string[][]} matriz - the matriz that contains the values
  * @returns A string
  */
 export const getCellValFromCoor = (coord: string, matriz: string[][]) => {
@@ -56,7 +56,7 @@ export const hasCellCoordFormat = (str: string) => {
 };
 
 /**
- * It takes a string expression and a matrix and returns a string expression with the cell values
+ * It takes a string expression and a matriz and returns a string expression with the cell values
  * instead of the cell coordinates
  * @param {string} expression - "A1+B1"
  * @param {string[][]} matriz - a 2D array of strings
@@ -70,8 +70,6 @@ export const getCellValues = (expression: string, matriz: string[][]) => {
     const operators = expression
         .split("")
         .filter((val) => operandChar.includes(val));
-
-    console.log({ cellCoordinates, operators });
 
     const cellValues = cellCoordinates.map((cellCoord) => {
         if (hasCellCoordFormat(cellCoord)) {

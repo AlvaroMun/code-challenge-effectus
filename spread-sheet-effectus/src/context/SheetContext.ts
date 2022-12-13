@@ -1,7 +1,11 @@
 import { createContext, useContext } from "react";
 
-type SheetContextType={
-     sheetMatrix:string[][], setSheetMatrix:Function 
-}
+type SheetContextType = {
+    sheetMatriz: string[][];
+    setSheetMatriz: Function;
+};
 
-export const SheetContext=createContext<SheetContextType>({sheetMatrix:[['']], setSheetMatrix:()=>null});
+export const SheetContext = createContext<SheetContextType>({
+    sheetMatriz: [[""]],
+    setSheetMatriz: () => null,
+});
