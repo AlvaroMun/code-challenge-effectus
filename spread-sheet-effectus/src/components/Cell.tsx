@@ -1,6 +1,10 @@
 import React, { FC, SyntheticEvent, useContext } from "react";
 import { SheetContext } from "../context/SheetContext";
-import { getCellValFromCoor, getCellValue, getProcessedValues } from "./utils";
+import {
+    getCellValFromCoor,
+    getCellValue,
+    getProcessedValues,
+} from "../utils/utils";
 //@ts-ignore
 import { Parser as FormulaParser } from "hot-formula-parser";
 

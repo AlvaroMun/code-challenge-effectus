@@ -3,7 +3,7 @@ import { SheetContext } from "../context/SheetContext";
 import { Row } from "./Row";
 import { TableBody } from "./TableBody";
 import { TableHeader } from "./TableHeader";
-import { alphabetArr } from "./utils";
+import { alphabetArr } from "../utils/utils";
 
 /**
  * SheetProps is an object with two properties, columns and rows, both of which are numbers.
