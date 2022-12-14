@@ -12,13 +12,14 @@ table {
     font-family: arial;
     border-spacing: 0px;
     border-collapse: collapse;
+    background-color: lightslategrey;
 }
 
-td,
+/* td,
 tr {
     padding: 0;
     border-spacing: 0;
-}
+} */
 
 td:first-child {
     min-width: 20px;
