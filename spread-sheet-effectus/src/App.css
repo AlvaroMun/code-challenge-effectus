@@ -15,12 +15,6 @@ table {
     background-color: lightslategrey;
 }
 
-/* td,
-tr {
-    padding: 0;
-    border-spacing: 0;
-} */
-
 td:first-child {
     min-width: 20px;
 }
